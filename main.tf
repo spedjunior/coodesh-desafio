@@ -130,7 +130,7 @@ resource "aws_lb_target_group" "tg" {
     path                = "/"
     protocol            = "HTTP"
     port                = "traffic-port"
-    interval            = 30
+    interval            = 10
   }
 }
 

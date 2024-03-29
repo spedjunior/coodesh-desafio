@@ -28,11 +28,9 @@ jobs:
                   arch: amd64                        
 
             - name: Copy files to S3
-              if: steps.changes.outputs.changes == 'true'
               run: |
                 aws s3 sync site s3://site-coodesh
 
             - name: Update Auto Scaling Group
-              if: steps.changes.outputs.changes == 'true'
               run: | 
                 aws autoscaling start-instance-refresh --auto-scaling-group-name asg-coodesh --strategy Rolling --preferences '{"MinHealthyPercentage": 100, "InstanceWarmup": 300}'

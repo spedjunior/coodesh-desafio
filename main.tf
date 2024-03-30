@@ -129,36 +129,18 @@ resource "aws_autoscaling_group" "asg" {
   termination_policies = ["OldestInstance"]
 }
 
-resource "aws_autoscaling_policy" "cpu_scaling_up" {
-  name                   = "asg-cpu-scaling-up"
-  scaling_adjustment     = 1  
-  adjustment_type        = "ChangeInCapacity"
-  cooldown               = 300 
+resource "aws_autoscaling_policy" "cpu_scaling" {
+  name                   = "asg-cpu-scaling"
+  policy_type            = "TargetTrackingScaling"
   autoscaling_group_name = aws_autoscaling_group.asg.name
 
   target_tracking_configuration {
     predefined_metric_specification {
       predefined_metric_type = "ASGAverageCPUUtilization"
     }
-    target_value = 90
+    target_value = 80
   }
 }
-
-resource "aws_autoscaling_policy" "cpu_scaling_down" {
-  name                   = "asg-cpu-scaling-down"
-  scaling_adjustment     = -1  
-  adjustment_type        = "ChangeInCapacity"
-  cooldown               = 300 
-  autoscaling_group_name = aws_autoscaling_group.asg.name
-
-  target_tracking_configuration {
-    predefined_metric_specification {
-      predefined_metric_type = "ASGAverageCPUUtilization"
-    }
-    target_value = 10
-  }
-}
-
 
 resource "aws_lb" "lb" {
   name               = "lb-coodesh"

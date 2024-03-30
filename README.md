@@ -107,10 +107,10 @@ flowchart LR;
         - LogGroup
         - Cloudwatch Agent
     - AWS VPC
-     - VPC
-     - Subnets
-     - Internet Gateway 
-     - Route Table
+        - VPC
+        - Subnets
+        - Internet Gateway 
+        - Route Table
 - Infra As Code
     - Terraform CLI (Required)
     - Terraform Cloud

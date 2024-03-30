@@ -45,6 +45,7 @@ module "aws_iam_instance_profile" {
 }
 module "network" {
     source = "./modules/network"
+    security_group_ids = [module.security_group.ec2Id]
 }
 
 module "security_group" {
@@ -124,9 +125,11 @@ resource "aws_autoscaling_group" "asg" {
   max_size         = 3
   desired_capacity = 1
 
-  vpc_zone_identifier = [module.network.subnetId1]
+  vpc_zone_identifier = [module.network.subnetPrivate]
   health_check_type = "EC2"
   termination_policies = ["OldestInstance"]
+
+  depends_on = [ module.network ]
 }
 
 resource "aws_autoscaling_policy" "cpu_scaling" {
@@ -146,7 +149,7 @@ resource "aws_lb" "lb" {
   name               = "lb-coodesh"
   internal           = false
   load_balancer_type = "application"
-  subnets            = [module.network.subnetId1, module.network.subnetId2]
+  subnets            = [module.network.subnetPrivate, module.network.subnetPublic]
   security_groups = [module.security_group.lbId]
 }
 

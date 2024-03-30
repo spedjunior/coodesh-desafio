@@ -27,7 +27,7 @@ resource "aws_security_group" "sg_ec2" {
 
 resource "aws_security_group" "sg_lb" {
   name        = "sg_lb"
-  description = "Security group for EC2 web server "
+  description = "Security group for Loadbalancer"
   vpc_id = var.vpc_id
 
   ingress {

@@ -4,7 +4,7 @@
 
 ## Introdução
 
-Este projeto é um desafio realizado em uma etapa do processo seletivo na [Coodesh](https://coodesh.com/) que consiste em criar um Webserver com nginx em uma instância EC2 com o sistema operacional ubuntu utilizando Infra As Code e Continuous Delivery.
+Este desafio faz parte de uma etapa do processo seletivo na Coodesh, no qual eu fui desafiado a criar um Webserver utilizando Nginx em uma instância EC2 com o sistema operacional Ubuntu. O objetivo é implementar Infraestrutura como Código (IaC) e adotar práticas de Entrega Contínua (Continuous Delivery).
 
 ## Estrutura de Diretórios do Projeto
 
@@ -149,18 +149,5 @@ terraform plan
 ```
 terraform apply 
 ```
-
-
-
-## Finalização e Instruções para a Apresentação
-
-1. Adicione o link do repositório com a sua solução no teste
-2. Verifique se o Readme está bom e faça o commit final em seu repositório;
-3. Envie e aguarde as instruções para seguir. Sucesso e boa sorte. =)
-
-## Suporte
-
-Use a [nossa comunidade](https://discord.gg/rdXbEvjsWu) para tirar dúvidas sobre o processo ou envie uma mensagem diretamente a um especialista no chat da plataforma. 
-
 
 

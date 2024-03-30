@@ -19,7 +19,7 @@ dpkg -i -E ./amazon-cloudwatch-agent.deb
 echo '{
   "agent": {
     "metrics_collection_interval": 60,
-    "run_as_user": "cwagent",
+    "run_as_user": "root",
     "logfile": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log"
     },
     "logs": {
@@ -32,6 +32,14 @@ echo '{
                     },
                     {
                         "file_path": "/var/log/auth.log",
+                        "log_group_name": "coodesh_log"
+                    },
+                    {
+                        "file_path": "/var/log/nginx/error.log",
+                        "log_group_name": "coodesh_log"
+                    },
+                    {
+                        "file_path": "/var/log/nginx/access.log",
                         "log_group_name": "coodesh_log"
                     }
                 ]
@@ -63,13 +71,13 @@ echo '{
                     "used_percent"
                 ],
                 "metrics_collection_interval": 60
-            },
+            }
         }
     }
 }' > /opt/aws/amazon-cloudwatch-agent/bin/config.json
 
 # Start the CloudWatch Agent
-/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json -s
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json
 systemctl start amazon-cloudwatch-agent.service
 
 

@@ -73,7 +73,7 @@ data "template_file" "user_data" {
 }
 
 resource "aws_cloudwatch_log_group" "coodesh_log" {
-  name = "/coodesh_log"
+  name = "coodesh_log"
 }
 
 resource "aws_launch_template" "lt_coodesh" {
@@ -127,7 +127,36 @@ resource "aws_autoscaling_group" "asg" {
   vpc_zone_identifier = [module.network.subnetId1]
   health_check_type = "EC2"
   termination_policies = ["OldestInstance"]
-  
+}
+
+resource "aws_autoscaling_policy" "cpu_scaling_up" {
+  name                   = "asg-cpu-scaling-up"
+  scaling_adjustment     = 1  
+  adjustment_type        = "ChangeInCapacity"
+  cooldown               = 300 
+  autoscaling_group_name = aws_autoscaling_group.asg.name
+
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+    target_value = 90
+  }
+}
+
+resource "aws_autoscaling_policy" "cpu_scaling_down" {
+  name                   = "asg-cpu-scaling-down"
+  scaling_adjustment     = -1  
+  adjustment_type        = "ChangeInCapacity"
+  cooldown               = 300 
+  autoscaling_group_name = aws_autoscaling_group.asg.name
+
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+    target_value = 10
+  }
 }
 
 

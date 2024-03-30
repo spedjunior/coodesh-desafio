@@ -84,7 +84,7 @@ resource "aws_launch_template" "lt_coodesh" {
     name = module.aws_iam_instance_profile.name
   }
   network_interfaces {
-    associate_public_ip_address = true
+    associate_public_ip_address = false
     delete_on_termination       = true
     security_groups = [module.security_group.ec2Id]
   }

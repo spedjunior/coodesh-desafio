@@ -11,19 +11,6 @@ apt  install -y awscli
  apt-get install -y nginx
  systemctl enable nginx && systemctl start nginx
 
-## Install Fail2ban
- apt-get install -y fail2ban
-echo "[nginx-http-auth]
-enabled = true
-port = http,https
-filter = nginx-http-auth
-logpath = /var/log/nginx/error.log
-maxretry = 6
-findtime = 600
-bantime = 600
-action = iptables-multiport[name=nginx, port=\"http,https\", protocol=tcp]
-" >/etc/fail2ban/jail.d/nginx-http-auth.conf
-
 # Install AWS CloudWatch Agent
 wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
 dpkg -i -E ./amazon-cloudwatch-agent.deb
@@ -34,6 +21,22 @@ echo '{
     "metrics_collection_interval": 60,
     "run_as_user": "cwagent",
     "logfile": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log"
+    },
+    "logs": {
+        "logs_collected": {
+            "files": {
+                "collect_list": [
+                    {
+                        "file_path": "/var/log/syslog",
+                        "log_group_name": "coodesh_log"
+                    },
+                    {
+                        "file_path": "/var/log/auth.log",
+                        "log_group_name": "coodesh_log"
+                    }
+                ]
+            }
+        }
     },
     "metrics": {
         "append_dimensions": {

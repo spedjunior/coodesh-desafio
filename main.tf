@@ -3,6 +3,21 @@ terraform {
     organization = "spedjunior" 
     workspaces { name = "coodesh-challenge" } 
     }
+    required_providers {
+      aws = {
+        source  = "hashicorp/aws"
+        version = ">= 5.42.0"
+      }
+      null = {
+        source  = "hashicorp/null"
+        version = ">= 3.2.2"
+      }
+      template = {
+        source  = "hashicorp/template"
+        version = ">= 2.2.0"
+      }
+    }
+    required_version = ">= 1.7.5"
 }
 
 provider "aws" {
@@ -55,6 +70,10 @@ data "aws_ami" "ubuntu" {
 
 data "template_file" "user_data" {
   template = file("./scripts/user_data.sh")
+}
+
+resource "aws_cloudwatch_log_group" "coodesh_log" {
+  name = "/coodesh_log"
 }
 
 resource "aws_launch_template" "lt_coodesh" {

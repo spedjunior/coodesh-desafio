@@ -77,7 +77,7 @@ echo '{
 }' > /opt/aws/amazon-cloudwatch-agent/bin/config.json
 
 # Start the CloudWatch Agent
-/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json -s
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json
 systemctl start amazon-cloudwatch-agent.service
 
 

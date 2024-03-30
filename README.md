@@ -4,7 +4,7 @@
 
 ## Introdução
 
-Este projeto é um desafio realizado em uma etapa do processo seletivo na [Coodesh](https://coodesh.com/) que consiste em criar um Webserver com nginx em uma instância EC2 com o sistema operacional ubuntu utilizando Infra As Code e Continuous Delivery.
+Este desafio faz parte de uma etapa do processo seletivo na Coodesh, no qual eu fui desafiado a criar um Webserver utilizando Nginx em uma instância EC2 com o sistema operacional Ubuntu. O objetivo é implementar Infraestrutura como Código (IaC) e adotar práticas de Entrega Contínua (Continuous Delivery).
 
 ## Estrutura de Diretórios do Projeto
 

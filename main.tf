@@ -184,11 +184,6 @@ resource "aws_autoscaling_attachment" "asg_attachment" {
   lb_target_group_arn = aws_lb_target_group.tg.arn
 }
 
-
 output "load_balancer_dns" {
-  value = aws_lb.lb.dns_name
-}
-
-output "bucket" {
-  value = module.s3.id
+  value = "http://${aws_lb.lb.dns_name}"
 }

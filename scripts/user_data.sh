@@ -4,12 +4,12 @@
 apt-get update
 apt  install -y awscli 
 
-#Download Site Content
- aws s3 cp s3://site-coodesh/index.html /var/www/html/index.html
-
 # Install Nginx
  apt-get install -y nginx
  systemctl enable nginx && systemctl start nginx
+
+#Download Site Content
+ aws s3 cp s3://site-coodesh/index.html /var/www/html/index.html
 
 # Install AWS CloudWatch Agent
 wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb

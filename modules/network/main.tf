@@ -72,13 +72,3 @@ resource "aws_route_table_association" "route_subnet_private" {
   subnet_id = aws_subnet.private_subnet1.id
   route_table_id = aws_route_table.table_route_private.id
 }
-
-
-/*
-resource "aws_vpc_endpoint" "instance_connect" {
-  vpc_id              = aws_vpc.vpc.id
-  service_name        = "com.amazonaws.us-east-1.ec2-instance-connect"
-  subnet_ids = [ aws_subnet.private_subnet1.id ]
-  security_group_ids = var.security_group_ids
-}
-*/
